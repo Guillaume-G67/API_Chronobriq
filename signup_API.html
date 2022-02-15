@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="test_API.css" />
+    <title>Test signUp API Lou</title>
+  </head>
+  <body>
+    <form
+      action="https://chronobriq-api.canaille.netlib.re/api/v1/users/"
+      id="form"
+      novalidate
+    >
+      <fieldset>
+        <legend>Formulaire signUp</legend>
+
+        <div>
+          Email :
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="example@email.com"
+            required
+            value="guillaume@test.org"
+          />
+          <span class="error" aria-live="polite"></span>
+        </div>
+        <div>
+          Nom d'utilisateur :
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="John.Doe"
+            required
+            value="guillaume_test"
+          />
+        </div>
+        <div>
+          Mot de passe :
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Minimum 6 caractères"
+            minlength="6"
+            required
+            value="azerty"
+          />
+        </div>
+        <input type="submit" value="S'inscrire" />
+      </fieldset>
+    </form>
+
+    <script type="module" src="/signup_API.js"></script>
+  </body>
+</html>

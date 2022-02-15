@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="test_API.css" />
+    <title>Test accès API Lou</title>
+  </head>
+  <body>
+    <div id="div"></div>
+    <form
+      action="https://chronobriq-api.canaille.netlib.re/api/v1/users/"
+      id="user_update"
+      novalidate
+    >
+      <fieldset>
+        <legend>Modifier les informations de l'utilisateur</legend>
+        <div>
+          Email :
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email de l'utilisateur : example@email.com"
+          />
+        </div>
+        Nom d'utilisateur :
+        <div>
+          <input type="text" name="username" placeholder="Nom d'utilisateur" />
+        </div>
+        <input type="submit" value="Modifier vos informations" />
+      </fieldset>
+    </form>
+    <form
+      action="https://chronobriq-api.canaille.netlib.re/api/v1/users/"
+      id="form"
+      novalidate
+    >
+      <fieldset>
+        <legend>Récupérer un ou des utilisateurs</legend>
+        <input
+          type="number"
+          name="requestedUserID"
+          placeholder="ID de l'utilisateur demandé"
+        />
+        <input type="submit" value="Récupérer l'utilisateur" />
+        <div>
+          Pour récupérer la liste de tous les utilisateurs, ne pas entrer de
+          valeur.
+        </div>
+      </fieldset>
+    </form>
+    <div id="list">Le ou les utilisateurs s'afficheront ci-dessous :</div>
+
+    <script type="module" src="/access_API.js"></script>
+  </body>
+</html>
