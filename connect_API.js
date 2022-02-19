@@ -41,16 +41,21 @@ async function handleFormSubmit(event) {
     const formData = new FormData(form);
     const responseData = await postFormDataAsJson({ url, formData });
 
-    // on va stocker
+    // utilisation des cookies
     // 1 : le token dans un cookie, avec une clé token, sa valeur, et un délai d'expiration de 2 heures
     // 2 : l'email, avec une clé email, sa valeur, et un délai d'expiration de 2 heures
     // 3 : le username, avec une clé username, sa valeur, et un délai d'expiration de 2 heures
-    setCookies(
-      responseData.token,
-      responseData.email,
-      responseData.username,
-      2
-    );
+    // setCookies(
+    //   responseData.token,
+    //   responseData.email,
+    //   responseData.username,
+    //   2
+    // );
+
+    // utilisation de sessionStorage
+    sessionStorage.setItem("token", responseData.token);
+    sessionStorage.setItem("email", responseData.email);
+    sessionStorage.setItem("username", responseData.username);
 
     location.assign("access_API.html"); // permet redirection vers page souhaitée une fois connexion établie
   } catch (error) {
@@ -61,11 +66,11 @@ async function handleFormSubmit(event) {
 // adapté d'après https://www.w3schools.com/js/js_cookies.asp
 
 // cookie stocke token (id encodé), email et username
-function setCookies(token, email, username, exhours) {
-  const d = new Date();
-  d.setTime(d.getTime() + exhours * 60 * 60 * 1000);
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = `token=${token}; ${expires};SameSite=None;Secure;path=/`;
-  document.cookie = `email=${email}; ${expires};SameSite=None;Secure;path=/`;
-  document.cookie = `username=${username}; ${expires};SameSite=None;Secure;path=/`;
-}
+// function setCookies(token, email, username, exhours) {
+//   const d = new Date();
+//   d.setTime(d.getTime() + exhours * 60 * 60 * 1000);
+//   let expires = "expires=" + d.toUTCString();
+//   document.cookie = `token=${token}; ${expires};SameSite=None;Secure;path=/`;
+//   document.cookie = `email=${email}; ${expires};SameSite=None;Secure;path=/`;
+//   document.cookie = `username=${username}; ${expires};SameSite=None;Secure;path=/`;
+// }

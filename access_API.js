@@ -4,9 +4,9 @@ import "./test_API.css";
 import jwt_decode from "jwt-decode";
 
 // Recupère user_id dans le token
-
-const token = getCookie("token").concat("/// jwt token");
-const decodedToken = jwt_decode(token);
+const token = sessionStorage.getItem("token");
+const formatedToken = token.concat("/// jwt token");
+const decodedToken = jwt_decode(formatedToken);
 const id = decodedToken.user_id;
 
 // Fonction auto-exécutante pour créer un paragraphe d'accueil avec email de l'utilisateur
@@ -16,9 +16,9 @@ const id = decodedToken.user_id;
   const text = document.createElement("p");
   div.appendChild(text);
   var newContent = document.createTextNode(
-    `Vous êtes maintenant connecté.e en tant que ${getCookie(
+    `Vous êtes maintenant connecté.e en tant que ${sessionStorage.getItem(
       "username"
-    )} (${getCookie("email")}) et pouvez accéder à différentes
+    )} (${sessionStorage.getItem("email")}) et pouvez accéder à différentes
     choses.`
   );
   text.appendChild(newContent);
@@ -48,7 +48,7 @@ async function postFormDataAsJson({ url, formData, fetchMethod }) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: getCookie("token"),
+      Authorization: sessionStorage.getItem("token"),
     },
   };
 
