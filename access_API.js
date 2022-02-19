@@ -3,20 +3,11 @@
 import "./test_API.css";
 import jwt_decode from "jwt-decode";
 
-// Recupère user_ID dans le token
-
-// 5 lignes suivantes pour test hors ligne
-// const exhours = 2;
-// const d = new Date();
-// d.setTime(d.getTime() + exhours * 60 * 60 * 1000);
-// let expires = "expires=" + d.toUTCString();
-// document.cookie = `token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMCwiZXhwIjoxNjQ1MDA5MTA4fQ.MC3pAbA6xKUuIcKxO3VbR4MsdHkGKex89zt5loiqLgU; ${expires};SameSite=None;Secure;path=/`;
+// Recupère user_id dans le token
 
 const token = getCookie("token").concat("/// jwt token");
 const decodedToken = jwt_decode(token);
 const id = decodedToken.user_id;
-
-console.log(id);
 
 // Fonction auto-exécutante pour créer un paragraphe d'accueil avec email de l'utilisateur
 
@@ -63,8 +54,12 @@ async function postFormDataAsJson({ url, formData, fetchMethod }) {
 
   // lignes suivantes pour passer un body à fetch avec contenu du formulaire user_update
   if (fetchMethod === "PATCH") {
+    // si les deux champs sont vides, on ne fait pas la requête
+    if (plainFormData.email === "" && plainFormData.username === "") {
+      return "Les champs email et username sont vides, la requête fetch n'est pas exécutée.";
+    }
     // on doit d'abord traiter plainFormData pour retirer les champs vides
-    if (plainFormData.email === "") {
+    else if (plainFormData.email === "") {
       plainFormData = {
         username: plainFormData.username,
       };
@@ -102,19 +97,14 @@ async function handleUserUpdateSubmit(event) {
 
   try {
     const formData = new FormData(form);
-    const responseData = await postFormDataAsJson({
-      url,
-      formData,
-      fetchMethod: "GET",
-    });
 
-    const responseDataBis = await postFormDataAsJson({
+    const responseData = await postFormDataAsJson({
       url: url.concat(id), // renvoie undefined si on .concat(id) en amont, donc on le fait ici
       formData,
       fetchMethod: "PATCH",
     });
 
-    console.log("responseDataBis : " + responseDataBis);
+    console.log("responseData : " + responseData);
   } catch (error) {
     console.error(error);
   }

@@ -41,10 +41,10 @@ async function handleFormSubmit(event) {
     const formData = new FormData(form);
     const responseData = await postFormDataAsJson({ url, formData });
 
-    console.log({ responseData });
     // on va stocker
     // 1 : le token dans un cookie, avec une clé token, sa valeur, et un délai d'expiration de 2 heures
     // 2 : l'email, avec une clé email, sa valeur, et un délai d'expiration de 2 heures
+    // 3 : le username, avec une clé username, sa valeur, et un délai d'expiration de 2 heures
     setCookies(
       responseData.token,
       responseData.email,
