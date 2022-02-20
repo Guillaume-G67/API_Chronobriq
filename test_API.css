@@ -67,6 +67,23 @@ input:focus:invalid {
   display: block;
 }
 
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+
+  box-sizing: border-box;
+  display: none;
+}
+
+.error.active {
+  padding: 0.3em;
+  display: block;
+}
+
 #list {
   width: 50vw;
   margin: 0;

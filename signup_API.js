@@ -58,14 +58,33 @@ async function handleFormSubmit(event) {
 
     location.assign("index.html"); // permet redirection vers page de connexion une fois utilisateur créé avec succès
   } catch (error) {
+    if (error.message.match("email")) {
+      error_email.innerHTML = "L'email est déjà pris !";
+      error_email.className = "error_email active";
+    }
+    if (error.message.match("username")) {
+      error_username.innerHTML = "Le nom d'utilisateur est déjà pris !";
+      error_username.className = "error_username active";
+    }
+
     console.error(error);
   }
 }
 
-// Vérification de l'email
+// Vérifications sur les champs du formulaire
+
+// Déclarations
 
 const email = document.getElementById("email");
 const error_email = document.querySelector(".error_email");
+
+const username = document.getElementById("username");
+const error_username = document.querySelector(".error_username");
+
+const password = document.getElementById("password");
+const error_password = document.querySelector(".error_password");
+
+// Vérification de l'email
 
 email.addEventListener("input", function (event) {
   // Chaque fois que l'utilisateur saisit quelque chose
@@ -96,9 +115,6 @@ function isEmailValid(email) {
 }
 
 // Vérification du mot de passe
-
-const password = document.getElementById("password");
-const error_password = document.querySelector(".error_password");
 
 password.addEventListener("input", function (event) {
   // Chaque fois que l'utilisateur saisit quelque chose

@@ -46,6 +46,11 @@ async function handleFormSubmit(event) {
 
     location.assign("access_API.html"); // permet redirection vers page souhaitée une fois connexion établie
   } catch (error) {
+    const error_span = document.querySelector(".error");
+
+    error_span.innerHTML = "L'email et/ou le mot de passe sont faux !";
+    error_span.className = "error active";
+
     console.error(error);
   }
 }
