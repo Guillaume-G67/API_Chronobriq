@@ -11,6 +11,7 @@
     <form
       action="https://chronobriq-api.canaille.netlib.re/api/v1/users/"
       id="form"
+      autocomplete="off"
       novalidate
     >
       <fieldset>
@@ -26,7 +27,7 @@
             required
             value="guillaume@test.org"
           />
-          <span class="error" aria-live="polite"></span>
+          <span class="error_email" aria-live="polite"></span>
         </div>
         <div>
           Nom d'utilisateur :
@@ -38,6 +39,7 @@
             required
             value="guillaume_test"
           />
+          <span class="error_username" aria-live="polite"></span>
         </div>
         <div>
           Mot de passe :
@@ -50,6 +52,7 @@
             required
             value="azerty"
           />
+          <span class="error_password" aria-live="polite"></span>
         </div>
         <input type="submit" value="S'inscrire" />
       </fieldset>

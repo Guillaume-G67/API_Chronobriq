@@ -6,9 +6,9 @@ import jwt_decode from "jwt-decode";
 const token = sessionStorage.getItem("token");
 const formatedToken = token.concat("/// jwt token");
 const decodedToken = jwt_decode(formatedToken);
-const id = decodedToken.user_id;
+const activeUser_id = decodedToken.user_id;
 
-// Fonction auto-exécutante pour créer un paragraphe d'accueil avec email de l'utilisateur
+// IIFE pour créer un paragraphe d'accueil avec username et email de l'utilisateur
 
 (() => {
   const div = document.getElementById("div");
@@ -98,7 +98,7 @@ async function handleUserUpdateSubmit(event) {
     const formData = new FormData(form);
 
     const responseData = await postFormDataAsJson({
-      url: url.concat(id), // renvoie undefined si on .concat(id) en amont, donc on le fait ici
+      url: url.concat(activeUser_id), // renvoie undefined si on .concat(id) en amont, donc on le fait ici
       formData,
       fetchMethod: "PATCH",
     });
@@ -134,8 +134,7 @@ async function handleFormSubmit(event) {
 // Fonction pour créer la liste des utilisateurs
 
 function createList(responseData) {
-  // crée une liste avec les utilisateurs et leurs informations
-  // si elle existe déjà on la supprime pour pouvoir la recréer
+  // si la liste existe déjà on la supprime pour la recréer (mise à jour)
   if (document.getElementById("ul") != null) {
     const element = document.getElementById("ul");
     element.parentNode.removeChild(element);
@@ -172,35 +171,3 @@ function createListItem(id, email, username) {
   );
   li.appendChild(newContent);
 }
-
-// d'après https://www.w3schools.com/js/js_cookies.asp
-
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie); // utile si contient des caractères spéciaux encodés
-  let ca = decodedCookie.split(";"); // permet de récupérer un array avec les "paires clé-valeur"
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1); // car les "paires clé-valeur" commencent par un espace (sauf la première)
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length); // si c vaut "email=guillaume@test.org" alors renvoie "guillaume@test.org"
-    }
-  }
-  return "";
-}
-
-// Propose aussi fonction pour vérifier cookie
-
-// function checkCookie() {
-//   let user = getCookie("username");
-//   if (user != "") {
-//     alert("Welcome again " + user);
-//   } else {
-//     user = prompt("Please enter your name:", "");
-//     if (user != "" && user != null) {
-//       setCookie("username", user, 365);
-//     }
-//   }
-// }

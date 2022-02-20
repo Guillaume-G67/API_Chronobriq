@@ -21,7 +21,7 @@ p {
   display: block;
 }
 
-input[type="email"] {
+input {
   -webkit-appearance: none;
   appearance: none;
 
@@ -46,7 +46,9 @@ input:focus:invalid {
 }
 
 /* This is the style of our error messages */
-.error {
+.error_email,
+.error_username,
+.error_password {
   width: 100%;
   padding: 0;
 
@@ -58,8 +60,11 @@ input:focus:invalid {
   box-sizing: border-box;
 }
 
-.error.active {
+.error_email.active,
+.error_username.active,
+.error_password.active {
   padding: 0.3em;
+  display: block;
 }
 
 #list {
