@@ -1,6 +1,5 @@
 // Imports
 
-import "./test_API.css";
 import jwt_decode from "jwt-decode";
 
 // Recupère user_id dans le token

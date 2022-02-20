@@ -1,5 +1,3 @@
-import "./test_API.css";
-
 // On récupère le formulaire et on lui attache un écouteur
 
 const form = document.getElementById("form");

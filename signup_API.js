@@ -1,7 +1,10 @@
-import "./test_API.css";
+// Listeners
+
+// bouton
+const button = document.getElementById("backToConnect");
+button.addEventListener("click", () => location.assign("index.html"));
 
 // On récupère le formulaire et on lui attache un écouteur
-
 const form = document.getElementById("form");
 form.addEventListener("submit", handleFormSubmit);
 
@@ -40,14 +43,34 @@ async function handleFormSubmit(event) {
   const url = form.action;
 
   try {
+    // On vérifie que les champs sont correctement remplis
+    if (formContainsError()) {
+      throw new Error("Erreur dans un champ du formulaire.");
+    }
+
     const formData = new FormData(form);
     const responseData = await postFormDataAsJson({ url, formData });
 
     console.log({ responseData });
 
-    location.assign("index.html"); // permet redirection vers page de connexion une fois utilisateur créé
+    location.assign("index.html"); // permet redirection vers page de connexion une fois utilisateur créé avec succès
   } catch (error) {
     console.error(error);
+  }
+}
+
+function formContainsError() {
+  if (
+    email.value.indexOf("@", 0) < 0 ||
+    email.value.indexOf(".", email.value.indexOf("@") + 1) < 0
+  ) {
+    alert("Mettez une adresse email valide.");
+    email.focus();
+    return true;
+  } else if (password.value.length < 6) {
+    alert("Le mot de passe est trop court.");
+    password.focus();
+    return true;
   }
 }
 
