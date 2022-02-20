@@ -70,7 +70,7 @@ const error_email = document.querySelector(".error_email");
 email.addEventListener("input", function (event) {
   // Chaque fois que l'utilisateur saisit quelque chose
   // on vérifie la validité du champ e-mail.
-  if (isEmailValid(email.value)) {
+  if (isEmailValid(email)) {
     // S'il y a un message d'erreur affiché et que le champ
     // est valide, on retire l'erreur
     error_email.innerHTML = ""; // On réinitialise le contenu
@@ -85,9 +85,9 @@ email.addEventListener("input", function (event) {
 // Fonction pour vérifier validité de l'email
 
 function isEmailValid(email) {
-  const regex =
+  let regex =
     /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
-  let bool = String(email).toLowerCase().match(regex);
+  let bool = String(email.value).toLowerCase().match(regex);
   if (bool === null) {
     return false;
   } else {
@@ -103,7 +103,7 @@ const error_password = document.querySelector(".error_password");
 password.addEventListener("input", function (event) {
   // Chaque fois que l'utilisateur saisit quelque chose
   // on vérifie la validité du champ e-mail.
-  if (password.value.length >= 6) {
+  if (checkPassword(password)) {
     // S'il y a un message d'erreur affiché et que le champ
     // est valide, on retire l'erreur
     error_password.innerHTML = ""; // On réinitialise le contenu
@@ -111,7 +111,19 @@ password.addEventListener("input", function (event) {
   } else {
     // S'il est invalide, on affiche un message d'erreur personnalisé
     error_password.innerHTML =
-      "Le mot de passe doit faire au moins 6 caractères !";
+      "Password must be between 6 to 12 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character !";
     error_password.className = "error_password active";
   }
 });
+
+// Fonction pour vérifier validité du mot de passe
+
+function checkPassword(inputtxt) {
+  let regex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,12}$/;
+  if (inputtxt.value.match(regex)) {
+    return true;
+  } else {
+    return false;
+  }
+}
