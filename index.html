@@ -7,9 +7,43 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <a href="/connect_API.html">Page connect_API.html</a><br />
-    <a href="/signUp_API.html">Page signUp_API.html</a>
+    <a href="/signup_API.html">Créer un compte utilisateur</a>
+    <form
+      action="https://chronobriq-api.canaille.netlib.re/api/v1/tokens/"
+      id="form"
+      novalidate
+    >
+      <fieldset>
+        <legend>Formulaire de connexion</legend>
+
+        <div>
+          Email :
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="example@email.com"
+            required
+            value="guillaume@email.com"
+          />
+          <span class="error" aria-live="polite"></span>
+        </div>
+        <div>
+          Mot de passe :
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Minimum 6 caractères"
+            minlength="6"
+            required
+            value="azerty"
+          />
+        </div>
+        <input type="submit" value="Se connecter" />
+      </fieldset>
+    </form>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

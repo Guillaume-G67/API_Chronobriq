@@ -45,8 +45,7 @@ async function handleFormSubmit(event) {
 
     console.log({ responseData });
 
-    location.replace("connect_API.html"); // permet redirection vers page de connexion une fois utilisateur créé
-    // location.assign ferait la même chose mais autoriserait la navigation en arrière
+    location.assign("index.html"); // permet redirection vers page de connexion une fois utilisateur créé
   } catch (error) {
     console.error(error);
   }
